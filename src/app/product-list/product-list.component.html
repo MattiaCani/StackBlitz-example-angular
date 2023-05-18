@@ -1,11 +1,29 @@
 <h2>Products</h2>
+
 <!-- Con ngFor il div itera epr ciascun prodotto della lista -->
 <div *ngFor="let product of products">
 
-<h3>
-{{ product.name }}
-</h3>
+<!-- Esempio di interpolazione tra stringhe che consente di rendere un certo
+ dato come testo -->
+  <h3>
+    <a [title]="product.name + ' details'"
+    [routerLink]="['/products', product.id]">
+      {{ product.name }} <!-- ogni nome prodotto linka alla pagina dettagli -->
+    </a>
+  </h3>
 
+  <p *ngIf="product.description">
+    Description: {{ product.description }}
+  </p>
+
+  <button type="button" (click)="share()">
+    Share
+  </button>
+
+  <app-product-alerts
+    [product]="product"
+    (notify)="onNotify()">
+  </app-product-alerts>
 </div>
 
 
